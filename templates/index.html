@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ content['name'] }} Weather</title>
+</head>
+<body>
+     <form action="{{ url_for('search') }}">
+        <label for="city">City</label><br />
+        <input type="text" name="city" id="city" placeholder="Enter city"><br />
+        <button type="submit">Search</button>
+    </form><br /><br />
+
+    <table >
+        <tr>
+            <th>Names</th>
+            <th>Values</th>
+        </tr>
+        {% for element in content %}
+            <tr>
+                <td>{{ element  }}</td>
+                <td>{{ content[element] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
