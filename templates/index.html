@@ -6,10 +6,10 @@
     <title>{{ content['name'] }} Weather</title>
 </head>
 <body>
-     <form action="{{ url_for('search') }}">
-        <label for="city">City</label><br />
-        <input type="text" name="city" id="city" placeholder="Enter city"><br />
-        <button type="submit">Search</button>
+     <form method="post">
+         {{ form.search_term.label }}
+         {{ form.search_term(id="city") }}
+         {{ form.submit() }}<br />
     </form><br /><br />
 
     <table >
@@ -17,12 +17,20 @@
             <th>Names</th>
             <th>Values</th>
         </tr>
-        {% for element in content %}
+        {% macro print_element(element) %}
             <tr>
                 <td>{{ element  }}</td>
                 <td>{{ content[element] }}</td>
             </tr>
-        {% endfor %}
+        {% endmacro %}
+
+        {% if content['name'] %}
+            {% for element in content %}
+                {{ print_element(element) }}
+            {% endfor %}
+        {% else %}
+            <p>City not found</p>
+        {% endif %}
     </table>
 </body>
 </html>
